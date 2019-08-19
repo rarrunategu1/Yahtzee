@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Yahtzee
 {
@@ -7,7 +8,22 @@ namespace Yahtzee
         Random random = new Random();
         public int Roll()
         {
-            return random.Next(1, 6);      
+            return random.Next(1, 7);      
+        }
+        public void rollFiveDice()
+        {
+            List<int> numbersRolled = new List<int>();
+            for ( int i = 0; i < 5; i++)
+            {
+                numbersRolled.Add(Roll());
+
+            }
+            foreach(int number in numbersRolled)
+            {
+                Console.WriteLine(number);
+            }
+            
+            
         }
 
         
@@ -19,8 +35,9 @@ namespace Yahtzee
         static void Main(string[] args)
         {
             Dice dice = new Dice();
-            int numberRolled = dice.Roll();
-            Console.WriteLine(numberRolled);
+            
+            dice.rollFiveDice();
+            
             
         }
     }
