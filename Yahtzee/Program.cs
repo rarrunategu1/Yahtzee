@@ -13,23 +13,24 @@ namespace Yahtzee
         }
         public List<int> rollFiveDice()
         {   
-            int rolls = 0;
+            int rolls = 3;
 
-            while (true && rolls < 3)
+            while (true && rolls > 0)
             {
-                Console.WriteLine("Would you like to roll all your dice?");
+                Console.WriteLine("Would you like to roll all your dice? You have {0} chances to roll.", rolls);
                 string reRoll = Console.ReadLine();
 
                 if (reRoll == "no")
-                {
-                    break;
+                { 
+                    rollOneDie();
                 }
 
+                //REROLL UP TO 3 TIMES
                 else if (reRoll == "yes")
                 {
-                    rolls++;
+                    rolls--;
 
-                    if (rolls == 1)
+                    if (rolls == 2)
                     { 
 
                         for (int i = 0; i < 5; i++)
@@ -39,7 +40,7 @@ namespace Yahtzee
                         }
                         continue;
                     }
-                    else if (rolls > 1)
+                    else if (rolls < 2)
                     {
                         for (int i = 0; i < 5; i++)
                         {
@@ -51,6 +52,45 @@ namespace Yahtzee
                     }
                 }
             }
+            Console.WriteLine("You've run out of rolls.");
+            rollOneDie();
+
+            return numbersRolled;
+        }
+        public List<int> rollOneDie()
+        {
+            int rolls = 0;
+            while (true && rolls < 3)
+            
+            {
+                Console.WriteLine("Would you like to reroll a particular die?");
+                string reRollOne = Console.ReadLine();
+
+                if (reRollOne == "no")
+                {
+                    break;
+                }
+                else if (reRollOne == "yes")
+                {
+                    Console.WriteLine("Which would you like to reroll?");
+                    
+
+                    int reRollOption = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine();
+
+                    for (int i = 0; i < numbersRolled.Count; i++)
+                    {
+                        //get index of number picked in numbersRolled and replace with another Roll
+                        
+                        //Console.WriteLine(numbersRolled[i]);
+                        
+                    }
+
+
+                }
+
+            }
+
             return numbersRolled;
         }
     }
