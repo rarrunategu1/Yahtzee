@@ -78,13 +78,23 @@ namespace Yahtzee
                     int reRollOption = Convert.ToInt32(Console.ReadLine());
                     Console.WriteLine();
 
+                    int index = 0;
+
                     for (int i = 0; i < numbersRolled.Count; i++)
                     {
                         //get index of number picked in numbersRolled and replace with another Roll
+
+                        index = numbersRolled.IndexOf(reRollOption);
+
+                        
+                        
+
+                        //Roll();
                         
                         //Console.WriteLine(numbersRolled[i]);
                         
                     }
+                    
 
 
                 }
