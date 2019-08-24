@@ -20,13 +20,8 @@ namespace Yahtzee
                 Console.WriteLine("Would you like to roll all your dice? You have {0} chances to roll.", rolls);
                 string reRoll = Console.ReadLine();
 
-                if (reRoll == "no")
-                { 
-                    rollOneDie();
-                }
-
                 //REROLL UP TO 3 TIMES
-                else if (reRoll == "yes")
+                if (reRoll == "yes")
                 {
                     rolls--;
 
@@ -44,23 +39,27 @@ namespace Yahtzee
                     {
                         for (int i = 0; i < 5; i++)
                         {
-                            numbersRolled = new List<int>(){0, 0, 0, 0, 0};
-                            numbersRolled[i] += Roll();
+                            numbersRolled[i] = Roll();
                             Console.WriteLine(numbersRolled[i]);
 
                         }
                     }
                 }
+                else if (reRoll == "no")
+                    {
+                        
+                        break;
+                    }
             }
-            Console.WriteLine("You've run out of rolls.");
-            rollOneDie();
+            
+            //rollOneDie();
 
             return numbersRolled;
         }
-        public List<int> rollOneDie()
+        public void rollOneDie()
         {
-            int rolls = 0;
-            while (true && rolls < 3)
+            
+            while (true)
             
             {
                 Console.WriteLine("Would you like to reroll a particular die?");
@@ -96,12 +95,12 @@ namespace Yahtzee
                     }
 
                 }
-
+               //return numbersRolled;
             }
 
-            return numbersRolled;
+            
         }
-    }
+    }   
 
     class Program
     {
@@ -110,6 +109,8 @@ namespace Yahtzee
             Dice dice = new Dice();
 
             dice.rollFiveDice();
+
+            dice.rollOneDie();
 
 
             
