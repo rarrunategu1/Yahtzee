@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Yahtzee
 {
@@ -56,13 +57,13 @@ namespace Yahtzee
 
             return numbersRolled;
         }
-        public void rollOneDie()
+        public void rollDie()
         {
             
             while (true)
             
             {
-                Console.WriteLine("Would you like to reroll a particular die?");
+                Console.WriteLine("Would you like to reroll any dice?");
                 string reRollOne = Console.ReadLine();
 
                 if (reRollOne == "no")
@@ -71,28 +72,48 @@ namespace Yahtzee
                 }
                 else if (reRollOne == "yes")
                 {
-                    Console.WriteLine("Which would you like to reroll?");
-                    
+                    Console.WriteLine("Which number(s) would you like to reroll?  Enter space separated numbers");
+                    string reRollOption = Console.ReadLine();
 
-                    int reRollOption = Convert.ToInt32(Console.ReadLine());
+                    //detect a space and create a list from the numbers to compare to the numbersRolled List
+                    int [] reRollNumbers = reRollOption.Split(' ').Select(int.Parse).ToArray();
+                    
                     Console.WriteLine();
 
-                    int indexOfRerollOption;
-                    indexOfRerollOption = numbersRolled.IndexOf(reRollOption);
-
-
-                    for (int i = 0; i < numbersRolled.Count; i++)
+                    //find out the index of every number picked to reroll in our original array
+                    for (int i = 0; i < reRollNumbers.Length; i++)
                     {
-                        
-                        if (i == indexOfRerollOption)
+                        if (numbersRolled.Contains(reRollNumbers[i]))
                         {
-                            numbersRolled.RemoveAt(i);
-                            numbersRolled.Add(Roll());
+                            List <int> indexOfReRollOption = new List<int>();
+                            
+                            indexOfReRollOption.Add(numbersRolled.IndexOf(reRollNumbers[i]));
+                            
+                            //need to make sure duplicate numbers show their correct index and doesn't just repeat the same index
+                            
+                            foreach (int num in indexOfReRollOption)
+                            {
+                                Console.WriteLine(num);
+                            }
                         }
                         
-                        Console.WriteLine(numbersRolled[i]);
-                        
+                        //Console.WriteLine(numbersRolled[i]);
                     }
+                    //int indexOfRerollOption = numbersRolled.IndexOf(reRollOption);
+
+
+                    //for (int i = 0; i < numbersRolled.Count; i++)
+                    //{
+                        
+                    //    if (i == indexOfRerollOption)
+                     //   {
+                       //     numbersRolled.RemoveAt(i);
+                         //   numbersRolled.Add(Roll());
+                        //}
+                        
+                        //Console.WriteLine(numbersRolled[i]);
+                        
+                    //}
 
                 }
                //return numbersRolled;
@@ -110,7 +131,7 @@ namespace Yahtzee
 
             dice.rollFiveDice();
 
-            dice.rollOneDie();
+            dice.rollDie();
 
 
             
