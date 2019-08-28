@@ -57,7 +57,7 @@ namespace Yahtzee
 
             return numbersRolled;
         }
-        public void rollDie()
+        public void rollDice()
         {
             
             while (true)
@@ -85,12 +85,15 @@ namespace Yahtzee
                     {
                         if (numbersRolled.Contains(reRollNumbers[i]))
                         {
+
+                            //POSSIBILITY OF JUST CHECKING THE VALUES IN THE THE REROLLNUMBERS AGAINST THE NUMBERS ROLLED INSTEAD OF GETTING THE INDEX
                             List <int> indexOfReRollOption = new List<int>();
-                            
+
                             indexOfReRollOption.Add(numbersRolled.IndexOf(reRollNumbers[i]));
-                            
+                            //indexOfReRollOption.Add(reRollNumbers[i]);
+
                             //need to make sure duplicate numbers show their correct index and doesn't just repeat the same index
-                            
+
                             foreach (int num in indexOfReRollOption)
                             {
                                 Console.WriteLine(num);
@@ -131,7 +134,7 @@ namespace Yahtzee
 
             dice.rollFiveDice();
 
-            dice.rollDie();
+            dice.rollDice();
 
 
             
