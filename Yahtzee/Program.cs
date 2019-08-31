@@ -10,9 +10,9 @@ namespace Yahtzee
         {
             Die die = new Die();
 
-            die.rollFiveDice();
+            die.RollFiveDice();
 
-            die.rollDice();
+            die.RollDice();
 
 
             

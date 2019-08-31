@@ -9,11 +9,11 @@ namespace Yahtzee
     {
         Random random = new Random();
         List<int> numbersRolled = new List<int>() { 0, 0, 0, 0, 0 };
-        public int Roll()
+        public int Roll(int sides)
         {
-            return random.Next(1, 7);
+            return random.Next(1, sides + 1);
         }
-        public List<int> rollFiveDice()
+        public List<int> RollFiveDice()
         {
             int rolls = 3;
 
@@ -32,7 +32,7 @@ namespace Yahtzee
 
                         for (int i = 0; i < 5; i++)
                         {
-                            numbersRolled[i] += Roll();
+                            numbersRolled[i] += Roll(5);
                             Console.WriteLine(numbersRolled[i]);
                         }
                         continue;
@@ -41,7 +41,7 @@ namespace Yahtzee
                     {
                         for (int i = 0; i < 5; i++)
                         {
-                            numbersRolled[i] = Roll();
+                            numbersRolled[i] = Roll(5);
                             Console.WriteLine(numbersRolled[i]);
 
                         }
@@ -58,7 +58,7 @@ namespace Yahtzee
 
             return numbersRolled;
         }
-        public void rollDice()
+        public void RollDice()
         {
 
             while (true)
