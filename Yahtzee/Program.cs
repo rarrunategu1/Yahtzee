@@ -12,7 +12,7 @@ namespace Yahtzee
 
             die.RollFiveDice();
 
-            die.RollDice();
+            
 
 
             

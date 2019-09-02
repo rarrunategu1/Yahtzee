@@ -50,11 +50,10 @@ namespace Yahtzee
                 else if (reRoll == "no")
                 {
 
+                    RollDice();
                     break;
                 }
             }
-
-            //rollOneDie();
 
             return numbersRolled;
         }
@@ -81,44 +80,58 @@ namespace Yahtzee
 
                     Console.WriteLine();
 
+                    List<int> indexOfReRollOption = new List<int>();
+
                     //find out the index of every number picked to reroll in our original array
                     for (int i = 0; i < reRollNumbers.Length; i++)
                     {
                         if (numbersRolled.Contains(reRollNumbers[i]))
                         {
-
-                            //POSSIBILITY OF JUST CHECKING THE VALUES IN THE THE REROLLNUMBERS AGAINST THE NUMBERS ROLLED INSTEAD OF GETTING THE INDEX
-                            List<int> indexOfReRollOption = new List<int>();
-
                             indexOfReRollOption.Add(numbersRolled.IndexOf(reRollNumbers[i]));
-                            //indexOfReRollOption.Add(reRollNumbers[i]);
 
                             //need to make sure duplicate numbers show their correct index and doesn't just repeat the same index
 
-                            foreach (int num in indexOfReRollOption)
+                        }
+                        //go through numbers Rolled and find compare indexOfReRollOption to index of numbers Rolled
+                       
+                    }
+                    
+
+                    for (int i = 0; i < numbersRolled.Count; i++)
+                    {
+
+                        for (int j = 0; j < indexOfReRollOption.Count; j++)
+                        {
+                            if (i == indexOfReRollOption[j])
                             {
-                                Console.WriteLine(num);
+                                numbersRolled.RemoveAt(i);
+                                
+                                numbersRolled.Add(Roll(5));
                             }
+
+                            //Console.WriteLine("Index of ReRoll {0}", indexOfReRollOption[j]);
+
                         }
 
-                        //Console.WriteLine(numbersRolled[i]);
+                        Console.WriteLine(numbersRolled[i]);
+
                     }
-                    //int indexOfRerollOption = numbersRolled.IndexOf(reRollOption);
 
+                }
+                
+                int firstNumber = numbersRolled[0];
+                int count = 0;
 
-                    //for (int i = 0; i < numbersRolled.Count; i++)
-                    //{
-
-                    //    if (i == indexOfRerollOption)
-                    //   {
-                    //     numbersRolled.RemoveAt(i);
-                    //   numbersRolled.Add(Roll());
-                    //}
-
-                    //Console.WriteLine(numbersRolled[i]);
-
-                    //}
-
+                for (int i = 0; i < numbersRolled.Count; i++)
+                {
+                    if (firstNumber == numbersRolled[i])
+                    {
+                        count++;
+                        if (count == 5)
+                        {
+                        Console.WriteLine("YAHTZEE!!");
+                        }
+                    }
                 }
                 //return numbersRolled;
             }
