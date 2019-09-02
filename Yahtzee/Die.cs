@@ -9,9 +9,9 @@ namespace Yahtzee
     {
         Random random = new Random();
         List<int> numbersRolled = new List<int>() { 0, 0, 0, 0, 0 };
-        public int Roll(int sides)
+        public int Roll(int sidedDice)
         {
-            return random.Next(1, sides + 1);
+            return random.Next(1, sidedDice + 1);
         }
         public List<int> RollFiveDice()
         {
