@@ -9,6 +9,7 @@ namespace Yahtzee
     {
         Random random = new Random();
         List<int> numbersRolled = new List<int>() { 0, 0, 0, 0, 0 };
+        bool winGame = false;
         public int Roll(int sidedDice)
         {
             return random.Next(1, (sidedDice + 1));
@@ -17,13 +18,15 @@ namespace Yahtzee
         {
             int rolls = 3;
 
-            while (true && rolls > 0)
+            
+
+            while (true && rolls > 0 && winGame == false)
             {
                 Console.WriteLine("Would you like to roll all your dice? You have {0} chances to roll.", rolls);
                 string reRoll = Console.ReadLine();
 
                 //REROLL UP TO 3 TIMES
-                if (reRoll == "yes")
+                if (reRoll == "yes" && winGame == false)
                 {
                     if (rolls == 3)
                     {
@@ -53,23 +56,24 @@ namespace Yahtzee
                     break;
                 }
             }
+            RollDice();
 
             return numbersRolled;
         }
         public void RollDice()
         {
 
-            while (true)
+            while (true && winGame == false)
 
             {
                 Console.WriteLine("Would you like to reroll any dice?");
-                string reRollOne = Console.ReadLine();
+                string reRollOne = Console.ReadLine().Trim();
 
                 if (reRollOne == "no")
                 {
                     break;
                 }
-                else if (reRollOne == "yes")
+                else if (reRollOne == "yes" && winGame == false)
                 {
                     Console.WriteLine("Which number(s) would you like to reroll?  Enter space separated numbers");
                     string reRollOption = Console.ReadLine();
@@ -103,24 +107,15 @@ namespace Yahtzee
                         {
                             if (i == indexOfReRollOption[j])
                             {
-                                numbersRolled.RemoveAt(i);
+                                numbersRolled.Insert(i, Roll(6));
+                                numbersRolled.RemoveAt(i + 1);
                                 numbersRemovedCount++;
-                               
-                                
                             }
-                            numbersRolled.Add(Roll(6));
-
                             //Console.WriteLine("Index of ReRoll {0}", indexOfReRollOption[j]);
-
                         }
-
                         Console.WriteLine(numbersRolled[i]);
-                        
-
                     }
-                    
                     //indexOfReRollOption.Clear();
-
                 }
                 
                 int firstNumber = numbersRolled[0];
@@ -133,8 +128,9 @@ namespace Yahtzee
                         count++;
                         if (count == 5)
                         {
-                        Console.WriteLine("YAHTZEE!!");
-                        break;
+                            winGame = true;
+                            Console.WriteLine("YAHTZEE!!");
+                            break;
                         }
                     }
                 }
