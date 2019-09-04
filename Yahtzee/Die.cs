@@ -11,7 +11,7 @@ namespace Yahtzee
         List<int> numbersRolled = new List<int>() { 0, 0, 0, 0, 0 };
         public int Roll(int sidedDice)
         {
-            return random.Next(1, sidedDice + 1);
+            return random.Next(1, (sidedDice + 1));
         }
         public List<int> RollFiveDice()
         {
@@ -25,27 +25,26 @@ namespace Yahtzee
                 //REROLL UP TO 3 TIMES
                 if (reRoll == "yes")
                 {
+                    if (rolls == 3)
+                    {
+
+                        for (int i = 0; i < 5; i++)
+                        {
+                            numbersRolled[i] += Roll(6);
+                            Console.WriteLine(numbersRolled[i]);
+                        }
+                        
+                    }
+                    else if (rolls < 3)
+                    {
+                        for (int i = 0; i < 5; i++)
+                        {
+                            numbersRolled[i] = Roll(6);
+                            Console.WriteLine(numbersRolled[i]);
+
+                        }
+                    }
                     rolls--;
-
-                    if (rolls == 2)
-                    {
-
-                        for (int i = 0; i < 5; i++)
-                        {
-                            numbersRolled[i] += Roll(5);
-                            Console.WriteLine(numbersRolled[i]);
-                        }
-                        continue;
-                    }
-                    else if (rolls < 2)
-                    {
-                        for (int i = 0; i < 5; i++)
-                        {
-                            numbersRolled[i] = Roll(5);
-                            Console.WriteLine(numbersRolled[i]);
-
-                        }
-                    }
                 }
                 else if (reRoll == "no")
                 {
@@ -96,7 +95,7 @@ namespace Yahtzee
                        
                     }
                     
-
+                    int numbersRemovedCount = 0;
                     for (int i = 0; i < numbersRolled.Count; i++)
                     {
 
@@ -105,17 +104,22 @@ namespace Yahtzee
                             if (i == indexOfReRollOption[j])
                             {
                                 numbersRolled.RemoveAt(i);
+                                numbersRemovedCount++;
+                               
                                 
-                                numbersRolled.Add(Roll(5));
                             }
+                            numbersRolled.Add(Roll(6));
 
                             //Console.WriteLine("Index of ReRoll {0}", indexOfReRollOption[j]);
 
                         }
 
                         Console.WriteLine(numbersRolled[i]);
+                        
 
                     }
+                    
+                    //indexOfReRollOption.Clear();
 
                 }
                 
@@ -130,6 +134,7 @@ namespace Yahtzee
                         if (count == 5)
                         {
                         Console.WriteLine("YAHTZEE!!");
+                        break;
                         }
                     }
                 }
